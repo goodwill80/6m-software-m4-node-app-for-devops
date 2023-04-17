@@ -27,7 +27,7 @@ jobs:
       # Archive and persist the Docker image
       - run:
           name: Archive Docker image
-          command: docker save --output image.tar "${IMAGE_TAG}"
+          command: docker save --output image.tar "cimg/node:16.10"
       - persist_to_workspace:
           root: .
           paths:
