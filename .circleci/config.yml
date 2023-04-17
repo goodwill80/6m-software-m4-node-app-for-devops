@@ -31,9 +31,9 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-          image: goodwill80/education-space
+          image: edisonzsq/education-space
       - docker/push:
-          image: goodwill80/education-space
+          image: edisonzsq/education-space
 
 workflows:
   simple_workflow:
