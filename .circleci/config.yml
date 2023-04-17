@@ -27,9 +27,6 @@ jobs:
   build-and-push:
     executor: docker/docker
     steps:
-      - run:
-      name: Docker Login
-      command: 'docker login -u goodwill80 -p oliver97311980'
       - setup_remote_docker
       - checkout
       - docker/check
@@ -48,4 +45,3 @@ workflows:
       - build-and-push:
           requires:
             - test
-
