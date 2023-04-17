@@ -15,8 +15,8 @@ executors:
 jobs:
   build:
     executor: docker-publisher
-    # docker:
-    #   - image: cimg/node:16.10
+    docker:
+      - image: cimg/node:16.10
     steps:
       - checkout
       - node/install-packages:
@@ -36,8 +36,8 @@ jobs:
             - ./image.tar
   test:
     executor: docker-publisher
-    # docker:
-    #   - image: cimg/node:16.10
+    docker:
+      - image: cimg/node:16.10
     steps:
       - checkout
       - node/install-packages:
