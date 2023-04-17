@@ -24,6 +24,14 @@ jobs:
       - run: |
           echo "Installing dependencies..."
           npm install
+      # Archive and persist the Docker image
+      - run:
+          name: Archive Docker image
+          command: docker save --output image.tar "${IMAGE_TAG}"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./image.tar
   test:
     executor: docker-publisher
     # docker:
