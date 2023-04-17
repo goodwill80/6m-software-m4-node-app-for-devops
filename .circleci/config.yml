@@ -25,8 +25,9 @@ jobs:
           echo "Installing dependencies..."
           npm install
   test:
-    docker:
-      - image: cimg/node:16.10
+    executor: docker-publisher
+    # docker:
+    #   - image: cimg/node:16.10
     steps:
       - checkout
       - node/install-packages:
@@ -34,11 +35,28 @@ jobs:
       - run: |
           echo "Running tests..."
           npm run test
+  push:
+    executor: docker-publisher
+    steps:
+      - setup_remote_docker
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Load Docker image
+          command: docker load --input /tmp/workspace/image.tar
+      - run:
+          name: Publish Docker image
+          command: |
+            echo "dckr_pat__Bm9XhSImys8TbxPITIwQgL1SoQ" | docker login --username "goodwill80" --password-stdin
+            docker push cimg/node:16.10
 
 workflows:
   simple_workflow:
     jobs:
       - build
+      - push:
+          requires:
+            - build
       - test:
           requires:
             - build
