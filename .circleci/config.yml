@@ -1,6 +1,6 @@
 version: 2.1
-# orbs:
-#   node: circleci/node@5.0.1
+orbs:
+  node: circleci/node@5.0.1
 
 # Define a common Docker container and environment for jobs
 executors:
